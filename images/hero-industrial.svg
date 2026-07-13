@@ -1,0 +1,45 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="heroTitle">
+  <title id="heroTitle">Atmospheric industrial plant illustration</title>
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#e8e6e0" />
+      <stop offset="100%" stop-color="#c1c3cc" />
+    </linearGradient>
+    <linearGradient id="ground" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#bfb9ac" />
+      <stop offset="100%" stop-color="#9f988c" />
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="25%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.95)" />
+      <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+    </radialGradient>
+    <linearGradient id="metal" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#e7e8ea" />
+      <stop offset="100%" stop-color="#bfc0c9" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#sky)" />
+  <rect y="540" width="1200" height="260" fill="url(#ground)" />
+  <circle cx="780" cy="220" r="140" fill="url(#halo)" opacity="0.7" />
+  <g opacity="0.95">
+    <path d="M140 610h220v-170h-220z" fill="#2f3959" />
+    <path d="M420 610h280v-220h-280z" fill="#3d4b6c" />
+    <path d="M760 610h260v-180h-260z" fill="#242f52" />
+    <path d="M220 450h80v40h-80z" fill="#9ba2b4" />
+    <path d="M530 390h120v50h-120z" fill="#9ea5b2" />
+    <path d="M820 430h90v50h-90z" fill="#9fa6b8" />
+    <path d="M170 540h860v20h-860z" fill="#181f3f" opacity="0.8" />
+    <path d="M310 480h8v110h-8z" fill="#121a34" />
+    <path d="M500 420h8v130h-8z" fill="#121a34" />
+    <path d="M680 470h8v90h-8z" fill="#121a34" />
+  </g>
+  <g fill="none" stroke="#0d1355" stroke-width="14" stroke-linecap="round" opacity="0.9">
+    <path d="M615 540h170l90-90h120" />
+    <path d="M300 650h560" stroke-opacity="0.25" />
+  </g>
+  <circle cx="760" cy="420" r="32" fill="#1925aa" />
+  <circle cx="745" cy="405" r="11" fill="#fff" />
+  <rect x="100" y="160" width="420" height="30" rx="8" fill="#c4c8d0" opacity="0.5" />
+  <rect x="100" y="200" width="340" height="22" rx="6" fill="#d9dce2" opacity="0.6" />
+  <rect x="100" y="235" width="240" height="18" rx="5" fill="#d9dce2" opacity="0.45" />
+</svg>

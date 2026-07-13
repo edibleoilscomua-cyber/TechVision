@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechVision Consulting</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #e8e6e0;
+      --surface: #ffffff;
+      --ink: #0a0a0a;
+      --accent: #1925aa;
+      --deep: #0d1355;
+      --muted: #6f6f6f;
+      --border: #beb8ad;
+      --text: #141414;
+      --mono: "Courier New", Courier, monospace;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(rgba(232, 230, 224, 0.92), rgba(232, 230, 224, 0.92)), url('images/hero-industrial.jpg') center/cover fixed no-repeat;
+      color: var(--ink);
+      min-width: 320px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a.button {
+      font: inherit;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+    }
+
+    .page-shell {
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(232, 230, 224, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(21, 20, 19, 0.08);
+    }
+
+    .nav-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      color: var(--deep);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    .brand span {
+      color: var(--accent);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      color: var(--ink);
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .lang-switch button {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.65rem;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+    }
+
+    .lang-switch button.active,
+    .lang-switch button:hover {
+      border-color: var(--deep);
+      color: var(--deep);
+    }
+
+    .primary-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--deep);
+      color: #fff;
+      border-color: var(--deep);
+      padding: 0.9rem 1.4rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    main {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+      display: grid;
+      gap: 3rem;
+    }
+
+    .hero {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    .hero-copy {
+      max-width: 640px;
+    }
+
+    .hero-copy p.lead {
+      margin: 1.5rem 0 0;
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 40rem;
+    }
+
+    .hero-summary {
+      margin-top: 1.5rem;
+      padding: 1.4rem 1.4rem 1.2rem;
+      background: rgba(255,255,255,0.94);
+      border: 1px solid rgba(25, 37, 170, 0.12);
+      display: grid;
+      gap: 0.9rem;
+      max-width: 40rem;
+    }
+
+    .hero-summary p {
+      margin: 0;
+      color: var(--ink);
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+
+    .hero-summary ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      list-style: disc inside;
+      display: grid;
+      gap: 0.65rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hero-summary li {
+      margin: 0;
+      padding-left: 0.25rem;
+    }
+
+    .hero-summary .geo-note {
+      margin: 0;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .hero-copy .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.75rem;
+    }
+
+    .hero-actions a {
+      padding: 0.95rem 1.4rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid var(--deep);
+      color: var(--deep);
+      min-width: 190px;
+      text-align: center;
+    }
+
+    .hero-actions a.secondary {
+      background: transparent;
+      color: var(--deep);
+    }
+
+    .hero-actions a.primary {
+      background: var(--deep);
+      color: #fff;
+    }
+
+    .hero-visual {
+      position: relative;
+      align-self: stretch;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(13, 19, 85, 0.14), rgba(232, 230, 224, 0.15));
+      pointer-events: none;
+    }
+
+    section {
+      position: relative;
+    }
+
+    .section-heading {
+      display: grid;
+      row-gap: 0.8rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .section-heading .subtitle {
+      text-transform: uppercase;
+      color: var(--accent);
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      font-family: var(--mono);
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+      line-height: 1.25;
+      max-width: 28rem;
+      letter-spacing: -0.02em;
+      font-weight: 500;
+    }
+
+    .hero-copy h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 3.6vw, 3rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      font-weight: 600;
+    }
+
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card,
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .card h3,
+    .card p,
+    .stat-card p {
+      margin: 0;
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--deep);
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.98rem;
+    }
+
+    .grid-3 .card {
+      min-height: 222px;
+      justify-content: space-between;
+    }
+
+    .stat-card {
+      padding: 1.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-family: var(--mono);
+      color: var(--deep);
+      background: linear-gradient(180deg, rgba(25, 37, 170, 0.08), rgba(255,255,255,0.6));
+      border-color: rgba(25, 37, 170, 0.15);
+    }
+
+    .stat-card span {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.45rem;
+      color: var(--ink);
+    }
+
+    .accordion {
+      border-top: 1px solid var(--border);
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .accordion-toggle {
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 1.35rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--deep);
+      font-size: 1rem;
+      font-family: var(--mono);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .accordion-toggle:hover {
+      color: var(--accent);
+    }
+
+    .accordion-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 250ms ease;
+    }
+
+    .accordion-panel.open {
+      max-height: 1000px;
+      padding-bottom: 1.5rem;
+    }
+
+    .accordion-panel > div {
+      padding-top: 0.8rem;
+    }
+
+    .accordion-panel p,
+    .accordion-panel li {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+
+    .accordion-panel ul {
+      padding-left: 1.2rem;
+      margin-top: 0.9rem;
+      list-style: disc inside;
+      display: grid;
+      gap: 0.65rem;
+      color: var(--muted);
+    }
+
+    .feature-pair {
+      display: grid;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .feature-pair .text {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .photo-collage {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .collage-tile {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      min-height: 320px;
+    }
+    .collage-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .collage-large {
+      min-height: 420px;
+    }
+    @media (max-width: 1024px) {
+      .photo-collage {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .collage-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .collage-split img,
+    .collage-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .collage-split img {
+      min-height: 160px;
+    }
+
+    blockquote {
+      margin: 0;
+      padding: 1.45rem 1.5rem;
+      border-left: 4px solid var(--accent);
+      background: rgba(25, 37, 170, 0.06);
+      color: var(--deep);
+      font-family: var(--mono);
+      letter-spacing: 0.02em;
+      line-height: 1.8;
+    }
+
+    .cta-strip {
+      background: var(--deep);
+      color: #fff;
+      padding: 2.4rem 1.5rem;
+      display: grid;
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    .cta-strip h2 {
+      margin: 0;
+      font-size: clamp(2rem, 2.4vw, 2.4rem);
+      line-height: 1.08;
+    }
+
+    .cta-strip p {
+      margin: 0;
+      max-width: 46rem;
+      color: rgba(255,255,255,0.86);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .cta-strip .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .cta-strip a {
+      display: inline-flex;
+      min-width: 220px;
+      justify-content: center;
+      align-items: center;
+      padding: 0.95rem 1.3rem;
+      color: var(--deep);
+      background: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+    }
+
+    .contact-card {
+      display: grid;
+      gap: 1.2rem;
+      background: var(--surface);
+      padding: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .contact-card a,
+    .contact-card p {
+      color: var(--ink);
+    }
+
+    .contact-links {
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--deep);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    footer {
+      padding: 2rem 1.5rem 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .footer-inner .footer-col {
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .footer-inner .footer-col a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .photo-collage {
+        grid-template-columns: 1fr;
+      }
+      .collage-split {
+        grid-template-columns: 1fr;
+      }
+      .collage-large,
+      .collage-right-top,
+      .collage-split img {
+        min-height: 220px;
+      }
+      .nav-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nav-actions {
+        justify-content: space-between;
+      }
+    }
+
+    @media (max-width: 720px) {
+      main {
+        padding-top: 1rem;
+      }
+      .nav-inner {
+        padding: 0.85rem 1rem;
+      }
+      .section-heading h2 {
+        font-size: 2.2rem;
+      }
+      .hero-copy p.lead {
+        font-size: 1rem;
+      }
+      .hero-summary {
+        max-width: none;
+        width: 100%;
+        padding: 1.2rem 1rem;
+      }
+      .hero-summary ul,
+      .accordion-panel ul {
+        padding-left: 1.15rem;
+        list-style: disc inside;
+      }
+      .hero-summary li,
+      .accordion-panel li {
+        font-size: 0.92rem;
+      }
+      .hero-actions a,
+      .primary-cta {
+        min-width: 0;
+        width: 100%;
+      }
+      .lang-switch {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header>
+      <div class="nav-inner">
+        <a class="brand" href="#home"><strong>TechVision</strong><span>Consulting</span></a>
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="#services" data-i18n="nav.services">Services</a>
+          <a href="#industries" data-i18n="nav.industries">Industries</a>
+          <a href="#expertise" data-i18n="nav.expertise">Expertise</a>
+          <a href="#experience" data-i18n="nav.experience">Experience</a>
+          <a href="#contact" data-i18n="nav.contact">Contact</a>
+        </nav>
+        <div class="nav-actions">
+          <div class="lang-switch" role="group" aria-label="Language switcher">
+            <button type="button" data-lang="en" class="active">EN</button>
+            <button type="button" data-lang="es">ES</button>
+            <button type="button" data-lang="ru">RU</button>
+            <button type="button" data-lang="de">DE</button>
+          </div>
+          <a class="button primary-cta" href="#contact" data-i18n="cta.request">Request consultation</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="hero-copy">
+          <p class="subtitle" data-i18n="hero.label">Industrial advisory for edible oils, oilseed processing and biodiesel projects</p>
+          <h1 data-i18n="hero.headline">TechVision Consulting</h1>
+          <p class="lead" data-i18n="hero.description">Owner-side CAPEX, EPC, procurement, commercial and performance improvement support for industrial owners, investors and plant teams across Europe and selected global markets.</p>
+          <div class="hero-summary">
+            <p data-i18n="hero.summary">TechVision Consulting helps owners, investors and plant teams in edible oils, oilseed processing and biodiesel-related industries make better CAPEX, EPC, procurement, commercial and operational decisions.</p>
+            <ul data-i18n="hero.summary.list"></ul>
+            <p class="geo-note" data-i18n="hero.geo">Europe-focused. Available for selected global assignments.</p>
+          </div>
+          <div class="hero-actions">
+            <a class="primary" href="#contact" data-i18n="hero.cta1">Request consultation</a>
+            <a class="secondary" href="#services" data-i18n="hero.cta2">View services</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img src="images/hero-industrial.jpg" alt="Industrial plant construction site at sunset" />
+        </div>
+      </section>
+
+      <section id="industries">
+        <div class="section-heading">
+          <p class="subtitle" data-i18n="industries.label">Industries we support</p>
+          <h2 data-i18n="industries.heading">Focused advisory for oilseed processing, refining and biodiesel.</h2>
+        </div>
+        <div class="grid-3">
+          <div class="card"><h3 data-i18n="industries.card1.title">Oilseed crushing</h3><p data-i18n="industries.card1.text">Owner-side reviews of crushing plant scope, raw material logistics, yield and plant integration.</p></div>
+          <div class="card"><h3 data-i18n="industries.card2.title">Edible oil refining</h3><p data-i18n="industries.card2.text">Refinery project and commissioning support with a commercial lens on margin and throughput.</p></div>
+          <div class="card"><h3 data-i18n="industries.card3.title">Biodiesel plants</h3><p data-i18n="industries.card3.text">Technical-commercial support for biodiesel projects, plant feasibility and feedstock routes.</p></div>
+          <div class="card"><h3 data-i18n="industries.card4.title">Feedstock preparation</h3><p data-i18n="industries.card4.text">Biodiesel feedstock pretreatment, high-FFA oil handling and raw material conditioning reviews.</p></div>
+          <div class="card"><h3 data-i18n="industries.card5.title">Vegetable oil production</h3><p data-i18n="industries.card5.text">Production economics, operational discipline and performance improvement for edible oils businesses.</p></div>
+          <div class="card"><h3 data-i18n="industries.card6.title">Trading & commodities</h3><p data-i18n="industries.card6.text">Commercial advisory that connects product mix, premiums and processing costs to margin impact.</p></div>
+        </div>
+      </section>
+
+      <section id="who">
+        <div class="section-heading">
+          <p class="subtitle" data-i18n="audience.label">Who we help</p>
+          <h2 data-i18n="audience.heading">Owners, investors, plant teams and operating assets.</h2>
+        </div>
+        <div class="grid-3">
+          <div class="card"><h3 data-i18n="audience.card1.title">Plant owners</h3><p data-i18n="audience.card1.text">Independent advice for asset owners who need an owner-side technical and commercial partner.</p></div>
+          <div class="card"><h3 data-i18n="audience.card2.title">Investors</h3><p data-i18n="audience.card2.text">Risk-aware feasibility and CAPEX review for new entrants in edible oils and biodiesel.</p></div>
+          <div class="card"><h3 data-i18n="audience.card3.title">Producers</h3><p data-i18n="audience.card3.text">Performance, process and margin improvement support for edible oils processors and traders.</p></div>
+          <div class="card"><h3 data-i18n="audience.card4.title">Project teams</h3><p data-i18n="audience.card4.text">EPC governance, procurement review and commissioning readiness for industrial project teams.</p></div>
+          <div class="card"><h3 data-i18n="audience.card5.title">Operating plants</h3><p data-i18n="audience.card5.text">Bottleneck diagnostics, downtime accounting and yield economics to improve plant output.</p></div>
+          <div class="card"><h3 data-i18n="audience.card6.title">No internal technical team</h3><p data-i18n="audience.card6.text">External engineering and commercial expertise for companies with a strategic project or investment idea.</p></div>
+        </div>
+      </section>
+
+      <section id="services">
+        <div class="section-heading">
+          <p class="subtitle" data-i18n="services.label">Core services</p>
+          <h2 data-i18n="services.heading">Owner-side consulting across CAPEX, procurement, commissioning and operational value.</h2>
+        </div>
+        <div class="accordion" id="serviceAccordion">
+          <div class="accordion-item">
+            <button class="accordion-toggle" type="button" data-target="panel-1" data-i18n="services.faq1.title">CAPEX / EPC Project Advisory</button>
+            <div class="accordion-panel" id="panel-1">
+              <div>
+                <p data-i18n="services.faq1.text">We support industrial CAPEX and EPC projects from early project definition to controlled execution. Our role is to protect the owner’s scope, budget, schedule and contract position by building a clear governance system around project scope, interfaces, cost control, schedule logic, risks, change orders, contractor coordination and decision-making.</p>
+                <p data-i18n="services.faq1.text2">The support can include project execution strategy, scope and battery-limit review, integrated schedule assessment, CAPEX baseline check, project controls setup, interface management, contractor progress review, risk and issue management, change order control and owner-side reporting.</p>
+                <p data-i18n="services.faq1.text3">The objective is to help the client keep the project under control before deviations become expensive with clear responsibilities, measurable progress, transparent risks and disciplined execution governance.</p>
+                <ul data-i18n="services.faq1.list"></ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-toggle" type="button" data-target="panel-2" data-i18n="services.faq2.title">Feasibility & Investment Support</button>
+            <div class="accordion-panel" id="panel-2">
+              <div>
+                <p data-i18n="services.faq2.text">We help investors and industrial owners validate project opportunities before committing major CAPEX. Our work connects technology selection, capacity scenarios, CAPEX / OPEX / TCO, raw material assumptions, product economics, execution risks and operational readiness into one investment decision logic.</p>
+                <p data-i18n="services.faq2.text2">The goal is to move from a high-level business idea to a structured, risk-adjusted investment view: what should be built, at what scale, with which technology, under which assumptions, and with what expected commercial return.</p>
+                <ul data-i18n="services.faq2.list"></ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-toggle" type="button" data-target="panel-3" data-i18n="services.faq3.title">Procurement Review & Bid Evaluation</button>
+            <div class="accordion-panel" id="panel-3">
+              <div>
+                <p data-i18n="services.faq3.text">We provide independent technical and commercial evaluation of supplier, technology and EPC proposals before the client commits to supplier selection, contract award or major CAPEX decisions.</p>
+                <p data-i18n="services.faq3.text2">The review focuses on scope completeness, technical compliance, hidden exclusions, battery limits, interface risks, utility assumptions, performance guarantees, delivery terms, commissioning obligations, acceptance criteria, warranty conditions, spare parts, lifecycle cost and total cost of ownership.</p>
+                <p data-i18n="services.faq3.text3">The objective is to move procurement decisions from price comparison to risk-adjusted value comparison — helping the owner understand what is included, what is missing, what can create future cost exposure and which supplier offer provides the strongest technical, commercial and operational position.</p>
+                <ul data-i18n="services.faq3.list"></ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-toggle" type="button" data-target="panel-4" data-i18n="services.faq4.title">Plant Audit, Cost Reduction & Performance Improvement</button>
+            <div class="accordion-panel" id="panel-4">
+              <div>
+                <p data-i18n="services.faq4.text">We perform technical and operational audits of existing crushing, refining, biodiesel and related process plants to identify hidden losses, bottlenecks, process inefficiencies and cost reduction opportunities.</p>
+                <p data-i18n="services.faq4.text2">The review covers production performance, yield, energy and utilities, downtime, process stability, maintenance interaction, product quality, operating discipline and key cost drivers. Each finding is converted into a practical improvement action with expected operational and financial impact.</p>
+                <p data-i18n="services.faq4.text3">The objective is not only to describe plant issues, but to build a clear performance improvement roadmap: what should be fixed first, what business impact it can generate, which actions require CAPEX, and which improvements can be achieved through process, maintenance or operational discipline.</p>
+                <ul data-i18n="services.faq4.list"></ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-toggle" type="button" data-target="panel-5" data-i18n="services.faq5.title">Downtime Accounting & Bad Actor Analysis System</button>
+            <div class="accordion-panel" id="panel-5">
+              <div>
+                <p data-i18n="services.faq5.text">We help operating plants build a structured downtime control and bad actor analysis system that shows where capacity, margin and EBITDA are being lost.</p>
+                <p>The system classifies planned and unplanned downtime, identifies recurring equipment and process issues, ranks bad actors by business impact and converts production losses into a prioritized maintenance and improvement action plan.</p>
+                <p>This creates the data foundation for predictive maintenance: failure trend visibility, recurring issue tracking, early warning signals, maintenance priority logic and better decisions before critical assets create major production losses.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-toggle" type="button" data-target="panel-6" data-i18n="services.faq6.title">Commissioning, Start-up & Ramp-up Support</button>
+            <div class="accordion-panel" id="panel-6">
+              <div>
+                <p data-i18n="services.faq6.text">We support the transition from construction to stable operation through commissioning planning, readiness assessment, punch list control, start-up coordination and ramp-up stabilization.</p>
+                <p>Our focus is not only to start the equipment, but to help the plant reach agreed quantitative and qualitative performance targets: throughput, yield, product quality, utility consumption, process stability, safety readiness and reliable shift operation.</p>
+                <p>When required, we also support operator and shift-team training, SOP preparation, start-up checklists, performance test readiness, acceptance criteria and handover to the operating team.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-toggle" type="button" data-target="panel-7" data-i18n="services.faq7.title">Commercial & Margin Analytics</button>
+            <div class="accordion-panel" id="panel-7">
+              <div>
+                <p data-i18n="services.faq7.text">Commercial-production analytics that convert plant performance into financial impact. We build crushing margin, refinery premium, gross margin, EBITDA and yield economics models, including reusable calculators and production-reporting tools for continuous management use.</p>
+                <ul data-i18n="services.faq7.list"></ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-toggle" type="button" data-target="panel-8" data-i18n="services.faq8.title">Biodiesel & Feedstock Advisory</button>
+            <div class="accordion-panel" id="panel-8">
+              <div>
+                <p data-i18n="services.faq8.text">We support biodiesel and biodiesel-feedstock projects from the early business idea to technical and commercial validation.</p>
+                <p>Our work may include feedstock market analysis, feedstock quality assessment, process route evaluation, technology selection, supplier proposal review, CAPEX / OPEX assumptions, integration with existing crushing or refining assets and development of the commercial business model.</p>
+                <p>The goal is to help clients understand whether the biodiesel project is technically feasible, commercially attractive and operationally realistic before committing major investment.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="expertise">
+        <div class="section-heading">
+          <p class="subtitle" data-i18n="why.label">Why TechVision Consulting</p>
+          <h2 data-i18n="why.heading">A practical owner-side partner for industrial CAPEX, commissioning and performance value.</h2>
+        </div>
+        <div class="feature-pair">
+          <div class="text">
+            <p data-i18n="why.text">TechVision Consulting combines CAPEX delivery, plant operations, commissioning, procurement, process economics and commercial analytics to help clients make decisions that remain valid after the plant is built and operating.</p>
+            <div class="grid-2">
+              <div class="card"><h3 data-i18n="why.card1.title">Owner-side mindset</h3><p data-i18n="why.card1.text">We support owners, investors and plant teams with independent project control and commercial clarity.</p></div>
+              <div class="card"><h3 data-i18n="why.card2.title">Practical experience</h3><p data-i18n="why.card2.text">Senior specialists with backgrounds in refining, crushing, biodiesel and industrial operations.</p></div>
+              <div class="card"><h3 data-i18n="why.card3.title">Technical + commercial</h3><p data-i18n="why.card3.text">We link process parameters with margin, EBITDA and operational cost dynamics.</p></div>
+              <div class="card"><h3 data-i18n="why.card4.title">Commissioning readiness</h3><p data-i18n="why.card4.text">We assess mechanical completion, punch lists, acceptance logic and startup risk before handover.</p></div>
+            </div>
+          </div>
+          <div>
+              <div class="photo-collage" aria-label="Project management photo collage">
+                <div class="collage-tile collage-large">
+                  <img src="images/expertise-new-1.png" alt="TechVision Consulting team in hard hats reviewing project plans" />
+                </div>
+                <div class="collage-tile collage-large">
+                  <img src="images/expertise-new-2.png" alt="TechVision Consulting team discussing engineering plans in an office" />
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+
+      <section id="experience">
+        <div class="section-heading">
+          <p class="subtitle" data-i18n="experience.label">Selected experience</p>
+          <h2 data-i18n="experience.heading">Proven industrial consulting in edible oils, crushing and biodiesel.</h2>
+        </div>
+        <div class="grid-3">
+          <div class="stat-card"><span>20+</span><p data-i18n="experience.card1.text">Former Cargill, Bunge and Wilmar professionals with extensive equipment experience on Crown CPM, DeSmet, Bühler, Stolz, Alfa Laval and other industrial suppliers.</p></div>
+          <div class="stat-card"><span>1000–2000</span><p data-i18n="experience.card2.text">TPD project experience from greenfield to brownfield and start-up. Refinery projects 150–1000 TPD continuous and semi-continuous; crushing projects 500–3000 TPD.</p></div>
+          <div class="stat-card"><span>EUR 3.7m–75m</span><p data-i18n="experience.card3.text">CAPEX exposure across consulting assignments and project reviews.</p></div>
+          <div class="stat-card"><span>Biodiesel</span><p data-i18n="experience.card4.text">feedstock, pretreatment, process route and commercial feasibility advisory.</p></div>
+        </div>
+      </section>
+
+      <section id="models">
+        <div class="section-heading">
+          <p class="subtitle" data-i18n="models.label">Engagement models</p>
+          <h2 data-i18n="models.heading">Flexible advisory formats for early review, delivery support and plant improvement.</h2>
+        </div>
+        <div class="grid-3">
+          <div class="card"><h3 data-i18n="models.card1.title">Focused Review</h3><p data-i18n="models.card1.text">2 days to 2 weeks independent, rapid review of concept, scope, schedule, supplier proposal, contract risk and investment logic, with focused recommendations for next steps.</p></div>
+          <div class="card"><h3 data-i18n="models.card2.title">Fractional advisory</h3><p data-i18n="models.card2.text">1 month to 12 months owner-side advisory with periodic or continual site attendance as agreed, supporting engineering, procurement, EPC coordination, governance and decision-making.</p></div>
+          <div class="card"><h3 data-i18n="models.card3.title">Improvement package</h3><p data-i18n="models.card3.text">2–8 weeks structured audit and improvement roadmap for operating plants, underperforming processes or commissioning recovery, with prioritised actions for measurable value uplift.</p></div>
+        </div>
+      </section>
+
+      <section class="cta-strip">
+        <div>
+          <h2 data-i18n="download.heading">Download capability statement</h2>
+          <p data-i18n="download.text">A concise statement of expertise for owners, investors and plant teams evaluating edible oils, crushing, refining and biodiesel advisory support.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="assets/capability-statement.pdf" download data-i18n="download.cta">Download Capability Statement</a>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="section-heading">
+          <p class="subtitle" data-i18n="contact.label">Contact</p>
+          <h2 data-i18n="contact.heading">Let’s review your project, plant performance issue or commercial calculation request.</h2>
+        </div>
+        <div class="contact-card">
+          <p data-i18n="contact.description">Send us your project scope, supplier proposal, plant performance issue or commercial calculation request. We will review the context and propose the most suitable support format.</p>
+          <div class="contact-links">
+            <a href="mailto:edibleoils.com.ua@gmail.com">edibleoils.com.ua@gmail.com</a>
+            <a href="https://wa.me/000000000000" target="_blank" rel="noreferrer">WhatsApp</a>
+            <a class="primary-cta" href="mailto:edibleoils.com.ua@gmail.com" data-i18n="contact.cta">Contact TechVision Consulting</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-col">
+          <strong>TechVision Consulting</strong>
+          <span data-i18n="footer.tagline">Industrial advisory for edible oils, oilseed processing and biodiesel projects</span>
+        </div>
+        <div class="footer-col">
+          <span data-i18n="footer.languages">EN / ES / RU / DE</span>
+          <a href="mailto:edibleoils.com.ua@gmail.com">edibleoils.com.ua@gmail.com</a>
+          <a href="https://wa.me/000000000000" target="_blank" rel="noreferrer">WhatsApp</a>
+        </div>
+        <div class="footer-col">
+          <span>© 2026 TechVision Consulting</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        "nav.services": "Services",
+        "nav.industries": "Industries",
+        "nav.expertise": "Expertise",
+        "nav.experience": "Experience",
+        "nav.contact": "Contact",
+        "cta.request": "Request consultation",
+        "hero.label": "Industrial advisory for edible oils, oilseed processing and biodiesel projects",
+        "hero.headline": "TechVision Consulting",
+        "hero.description": "Owner-side CAPEX, EPC, procurement, commercial and performance improvement support for industrial owners, investors and plant teams across Europe and selected global markets.",
+        "hero.summary": "TechVision Consulting helps owners, investors and plant teams in edible oils, oilseed processing and biodiesel-related industries make better CAPEX, EPC, procurement, commercial and operational decisions.",
+        "hero.summary.list": ["Validate investment ideas","Assess CAPEX / OPEX / TCO","Compare technology options","Review EPC and supplier proposals","Build procurement review","Prepare projects for commissioning and start-up","Conduct plant audit","Reduce process costs","Improve performance","Establish downtime accounting and bad actor analysis","Translate production KPIs into commercial / EBITDA impact"],
+        "hero.geo": "Europe-focused. Available for selected global assignments.",
+        "hero.cta1": "Request consultation",
+        "hero.cta2": "View services",
+        "industries.label": "Industries we support",
+        "industries.heading": "Focused advisory for oilseed processing, refining and biodiesel.",
+        "industries.card1.title": "Oilseed crushing",
+        "industries.card1.text": "Owner-side reviews of crushing plant scope, raw material logistics, yield and plant integration.",
+        "industries.card2.title": "Edible oil refining",
+        "industries.card2.text": "Refinery project and commissioning support with a commercial lens on margin and throughput.",
+        "industries.card3.title": "Biodiesel plants",
+        "industries.card3.text": "Technical-commercial support for biodiesel projects, plant feasibility and feedstock routes.",
+        "industries.card4.title": "Feedstock preparation",
+        "industries.card4.text": "Biodiesel feedstock pretreatment, high-FFA oil handling and raw material conditioning reviews.",
+        "industries.card5.title": "Vegetable oil production",
+        "industries.card5.text": "Production economics, operational discipline and performance improvement for edible oils businesses.",
+        "industries.card6.title": "Trading & commodities",
+        "industries.card6.text": "Commercial advisory that connects product mix, premiums and processing costs to margin impact.",
+        "audience.label": "Who we help",
+        "audience.heading": "Owners, investors, plant teams and operating assets.",
+        "audience.card1.title": "Plant owners",
+        "audience.card1.text": "Independent advice for asset owners who need an owner-side technical and commercial partner.",
+        "audience.card2.title": "Investors",
+        "audience.card2.text": "Risk-aware feasibility and CAPEX review for new entrants in edible oils and biodiesel.",
+        "audience.card3.title": "Producers",
+        "audience.card3.text": "Performance, process and margin improvement support for edible oils processors and traders.",
+        "audience.card4.title": "Project teams",
+        "audience.card4.text": "EPC governance, procurement review and commissioning readiness for industrial project teams.",
+        "audience.card5.title": "Operating plants",
+        "audience.card5.text": "Bottleneck diagnostics, downtime accounting and yield economics to improve plant output.",
+        "audience.card6.title": "No internal technical team",
+        "audience.card6.text": "External engineering and commercial expertise for companies with a strategic project or investment idea.",
+        "services.label": "Core services",
+        "services.heading": "Owner-side consulting across CAPEX, procurement, commissioning and operational value.",
+        "services.faq1.title": "CAPEX / EPC Project Advisory",
+        "services.faq1.text": "We support industrial CAPEX and EPC projects from early project definition to controlled execution. Our role is to protect the owner’s scope, budget, schedule and contract position by building a clear governance system around project scope, interfaces, cost control, schedule logic, risks, change orders, contractor coordination and decision-making.",
+        "services.faq1.text2": "The support can include project execution strategy, scope and battery-limit review, integrated schedule assessment, CAPEX baseline check, project controls setup, interface management, contractor progress review, risk and issue management, change order control and owner-side reporting.",
+        "services.faq1.text3": "The objective is to help the client keep the project under control before deviations become expensive with clear responsibilities, measurable progress, transparent risks and disciplined execution governance.",
+        "services.faq1.list": ["Project scope, battery limits and execution strategy review","Owner-side governance structure and decision-making cadence","Integrated schedule, critical path and milestone review","CAPEX baseline, cost control and forecast-at-completion logic","Interface management across process, civil, E&I, automation and utilities","Risk, issue, change order and claim exposure control","Contractor coordination and progress review","Monthly owner-side project reporting"],
+        "services.faq2.title": "Feasibility & Investment Support",
+        "services.faq2.text": "We help investors and industrial owners validate project opportunities before committing major CAPEX. Our work connects technology selection, capacity scenarios, CAPEX / OPEX / TCO, raw material assumptions, product economics, execution risks and operational readiness into one investment decision logic.",
+        "services.faq2.text2": "The goal is to move from a high-level business idea to a structured, risk-adjusted investment view: what should be built, at what scale, with which technology, under which assumptions, and with what expected commercial return.",
+        "services.faq2.list": ["Feasibility review memo","Business case structure","Technology option comparison","Capacity scenario analysis","CAPEX / OPEX / TCO model","Risk-adjusted investment assumptions","Sensitivity analysis","Stage-gate recommendation","Investment decision summary"],
+        "services.faq3.title": "Procurement Review & Bid Evaluation",
+        "services.faq3.text": "We provide independent technical and commercial evaluation of supplier, technology and EPC proposals before the client commits to supplier selection, contract award or major CAPEX decisions.",
+        "services.faq3.text2": "The review focuses on scope completeness, technical compliance, hidden exclusions, battery limits, interface risks, utility assumptions, performance guarantees, delivery terms, commissioning obligations, acceptance criteria, warranty conditions, spare parts, lifecycle cost and total cost of ownership.",
+        "services.faq3.text3": "The objective is to move procurement decisions from price comparison to risk-adjusted value comparison — helping the owner understand what is included, what is missing, what can create future cost exposure and which supplier offer provides the strongest technical, commercial and operational position.",
+        "services.faq3.list": ["RFQ / RFP review comments","Technical Bid Evaluation / TBE","Commercial Bid Evaluation / CBE","Supplier comparison matrix","Scope gap and exclusion register","Clarification question list","TCO / LCC comparison model","Contract risk comments","Negotiation checklist","Recommendation for supplier selection"],
+        "services.faq4.title": "Plant Audit, Cost Reduction & Performance Improvement",
+        "services.faq4.text": "We perform technical and operational audits of existing crushing, refining, biodiesel and related process plants to identify hidden losses, bottlenecks, process inefficiencies and cost reduction opportunities.",
+        "services.faq4.text2": "The review covers production performance, yield, energy and utilities, downtime, process stability, maintenance interaction, product quality, operating discipline and key cost drivers. Each finding is converted into a practical improvement action with expected operational and financial impact.",
+        "services.faq4.text3": "The objective is not only to describe plant issues, but to build a clear performance improvement roadmap: what should be fixed first, what business impact it can generate, which actions require CAPEX, and which improvements can be achieved through process, maintenance or operational discipline.",
+        "services.faq4.list": ["Technical and operational plant audit","Bottleneck and capacity constraint analysis","Yield, losses and process cost review","Energy, utilities and downtime assessment","Product quality and process stability analysis","Prioritized improvement roadmap with EBITDA impact"],
+        "services.faq5.title": "Downtime Accounting & Bad Actor Analysis System",
+        "services.faq5.text": "We help operating plants build a structured downtime control and bad actor analysis system that shows where capacity, margin and EBITDA are being lost. The system classifies planned and unplanned downtime, identifies recurring equipment and process issues, ranks bad actors by business impact and converts production losses into a prioritized maintenance and improvement action plan. This creates the data foundation for predictive maintenance: failure trend visibility, recurring issue tracking, early warning signals, maintenance priority logic and better decisions before critical assets create major production losses.",
+        "services.faq6.title": "Commissioning, Start-up & Ramp-up Support",
+        "services.faq6.text": "We support the transition from construction to stable operation through commissioning planning, readiness assessment, punch list control, start-up coordination and ramp-up stabilization. Our focus is not only to start the equipment, but to help the plant reach agreed quantitative and qualitative performance targets: throughput, yield, product quality, utility consumption, process stability, safety readiness and reliable shift operation. When required, we also support operator and shift-team training, SOP preparation, start-up checklists, performance test readiness, acceptance criteria and handover to the operating team.",
+        "services.faq7.title": "Commercial & Margin Analytics",
+        "services.faq7.text": "Commercial-production analytics that convert plant performance into financial impact. We build crushing margin, refinery premium, gross margin, EBITDA and yield economics models, including reusable calculators and production-reporting tools for continuous management use.",
+        "services.faq7.list": ["Crushing margin calculator","Refinery premium model","Gross margin and EBITDA impact model","Yield economics calculator","Product mix scenario model","Processing cost model","Loss-to-money conversion logic","Production reporting template","Monthly performance-to-margin report","Management dashboard structure"],
+        "services.faq8.title": "Biodiesel & Feedstock Advisory",
+        "services.faq8.text": "We support biodiesel and biodiesel-feedstock projects from the early business idea to technical and commercial validation. Our work may include feedstock market analysis, feedstock quality assessment, process route evaluation, technology selection, supplier proposal review, CAPEX / OPEX assumptions, integration with existing crushing or refining assets and development of the commercial business model. The goal is to help clients understand whether the biodiesel project is technically feasible, commercially attractive and operationally realistic before committing major investment.",
+        "why.label": "Why TechVision Consulting",
+        "why.heading": "A practical owner-side partner for industrial CAPEX, commissioning and performance value.",
+        "why.text": "TechVision Consulting combines CAPEX delivery, plant operations, commissioning, procurement, process economics and commercial analytics to help clients make decisions that remain valid after the plant is built and operating.",
+        "why.card1.title": "Owner-side mindset",
+        "why.card1.text": "We support owners, investors and plant teams with independent project control and commercial clarity.",
+        "why.card2.title": "Practical experience",
+        "why.card2.text": "Senior specialists with backgrounds in refining, crushing, biodiesel and industrial operations.",
+        "why.card3.title": "Technical + commercial",
+        "why.card3.text": "We link process parameters with margin, EBITDA and operational cost dynamics.",
+        "why.card4.title": "Commissioning readiness",
+        "why.card4.text": "We assess mechanical completion, punch lists, acceptance logic and startup risk before handover.",
+        "experience.label": "Selected experience",
+        "experience.heading": "Proven industrial consulting in edible oils, crushing and biodiesel.",
+        "experience.card1.text": "Former Cargill, Bunge and Wilmar professionals with extensive equipment experience on Crown CPM, DeSmet, Bühler, Stolz, Alfa Laval and other industrial suppliers.",
+        "experience.card2.text": "TPD project experience from greenfield to brownfield and start-up. Refinery projects 150–1000 TPD continuous and semi-continuous; crushing projects 500–3000 TPD.",
+        "experience.card3.text": "CAPEX exposure across consulting assignments and project reviews.",
+        "experience.card4.text": "feedstock, pretreatment, process route and commercial feasibility advisory.",
+        "models.label": "Engagement models",
+        "models.heading": "Flexible advisory formats for early review, delivery support and plant improvement.",
+        "models.card1.title": "Focused Review",
+        "models.card1.text": "2 days to 2 weeks independent, rapid review of concept, scope, schedule, supplier proposal, contract risk and investment logic, with focused recommendations for next steps.",
+        "models.card2.title": "Fractional advisory",
+        "models.card2.text": "1 month to 12 months owner-side advisory with periodic or continual site attendance as agreed, supporting engineering, procurement, EPC coordination, governance and decision-making.",
+        "models.card3.title": "Improvement package",
+        "models.card3.text": "2–8 weeks structured audit and improvement roadmap for operating plants, underperforming processes or commissioning recovery, with prioritised actions for measurable value uplift.",
+        "download.heading": "Download capability statement",
+        "download.text": "A concise statement of expertise for owners, investors and plant teams evaluating edible oils, crushing, refining and biodiesel advisory support.",
+        "download.cta": "Download Capability Statement",
+        "contact.label": "Contact",
+        "contact.heading": "Let’s review your project, plant performance issue or commercial calculation request.",
+        "contact.description": "Send us your project scope, supplier proposal, plant performance issue or commercial calculation request. We will review the context and propose the most suitable support format.",
+        "contact.cta": "Contact TechVision Consulting",
+        "footer.tagline": "Industrial advisory for edible oils, oilseed processing and biodiesel projects",
+        "footer.languages": "EN / ES / RU / DE"
+      },
+      es: {
+        "nav.services": "Servicios",
+        "nav.industries": "Industrias",
+        "nav.expertise": "Experiencia",
+        "nav.experience": "Resultados",
+        "nav.contact": "Contacto",
+        "cta.request": "Solicitar consulta",
+        "hero.label": "Asesoría industrial para aceites comestibles, procesamiento de semillas oleaginosas y biodiésel",
+        "hero.headline": "TechVision Consulting",
+        "hero.description": "Apoyo del lado del propietario en CAPEX, EPC, adquisiciones, comercial y mejora de rendimiento para propietarios, inversores y equipos de planta en Europa y mercados globales seleccionados.",
+        "hero.summary": "TechVision Consulting ayuda a propietarios, inversores y equipos de planta en aceites comestibles, procesamiento de semillas oleaginosas y proyectos relacionados con biodiésel a tomar mejores decisiones en CAPEX, EPC, adquisiciones, comercial y operaciones.",
+        "hero.summary.list": ["Verificar la idea de inversión","Evaluar CAPEX / OPEX / TCO","Comparar soluciones tecnológicas","Revisar propuestas de EPC y proveedores","Organizar la revisión de compras","Preparar el proyecto para commissioning y start-up","Realizar auditoría de planta","Reducir costos de proceso","Mejorar el rendimiento","Establecer contabilidad de paradas y análisis de bad actors","Traducir KPIs de producción a impacto comercial / EBITDA"],
+        "hero.geo": "Con enfoque en Europa. Disponible para asignaciones globales seleccionadas.",
+        "hero.cta1": "Solicitar consulta",
+        "hero.cta2": "Ver servicios",
+        "industries.label": "Industrias que apoyamos",
+        "industries.heading": "Asesoría enfocada en procesamiento de semillas, refinación y biodiésel.",
+        "industries.card1.title": "Trituración de semillas",
+        "industries.card1.text": "Revisiones del lado del propietario del alcance de la planta de trituración, logística de materia prima y rendimiento.",
+        "industries.card2.title": "Refinación de aceites",
+        "industries.card2.text": "Apoyo a proyectos de refinería y puesta en marcha con un enfoque comercial en margen y producción.",
+        "industries.card3.title": "Plantas de biodiésel",
+        "industries.card3.text": "Apoyo técnico-comercial para proyectos de biodiésel, factibilidad de planta y rutas de alimentación.",
+        "industries.card4.title": "Preparación de materia prima",
+        "industries.card4.text": "Tratamiento previo de materia prima para biodiésel, manejo de aceites de alta FFA y acondicionamiento.",
+        "industries.card5.title": "Producción de aceites",
+        "industries.card5.text": "Economía de producción, disciplina operativa y mejora de rendimiento para negocios de aceites comestibles.",
+        "industries.card6.title": "Comercio y materias primas",
+        "industries.card6.text": "Asesoría comercial que conecta mezcla de productos, primas y costos de procesamiento con el margen.",
+        "audience.label": "A quién ayudamos",
+        "audience.heading": "Propietarios, inversores, equipos de planta y activos en operación.",
+        "audience.card1.title": "Propietarios de plantas",
+        "audience.card1.text": "Asesoría independiente para propietarios que necesitan un socio técnico y comercial.",
+        "audience.card2.title": "Inversores",
+        "audience.card2.text": "Revisión de factibilidad y CAPEX para nuevos actores en aceites comestibles y biodiésel.",
+        "audience.card3.title": "Productores",
+        "audience.card3.text": "Soporte de mejora de rendimiento, proceso y margen para procesadores y comerciantes de aceites.",
+        "audience.card4.title": "Equipos de proyecto",
+        "audience.card4.text": "Gobernanza EPC, revisión de adquisiciones y preparación de puesta en marcha.",
+        "audience.card5.title": "Plantas en operación",
+        "audience.card5.text": "Diagnóstico de cuellos de botella, contabilidad de paradas y economía de rendimiento.",
+        "audience.card6.title": "Sin equipo técnico interno",
+        "audience.card6.text": "Experiencia externa en ingeniería y comercial para proyectos estratégicos o ideas de inversión.",
+        "services.label": "Servicios clave",
+        "services.heading": "Consultoría del lado del propietario en CAPEX, adquisiciones, puesta en marcha y valor operativo.",
+        "services.faq1.title": "Asesoría de proyectos CAPEX / EPC",
+        "services.faq1.text": "Apoyamos proyectos industriales CAPEX y EPC desde la definición temprana hasta la ejecución controlada. Nuestro papel es proteger el alcance, el presupuesto, el cronograma y la posición contractual del propietario construyendo un sistema de gobernanza claro en torno al alcance del proyecto, las interfaces, el control de costos, la lógica del cronograma, los riesgos, las órdenes de cambio, la coordinación de contratistas y la toma de decisiones.",
+        "services.faq1.text2": "El apoyo puede incluir estrategia de ejecución del proyecto, revisión de alcance y límites de batería, evaluación de cronograma integrado, verificación de línea base de CAPEX, configuración de controles de proyectos, gestión de interfaces, revisión del progreso de contratistas, gestión de riesgos y problemas, control de órdenes de cambio e informes del lado del propietario.",
+        "services.faq1.text3": "El objetivo es ayudar al cliente a mantener el proyecto bajo control antes de que las desviaciones se vuelvan costosas, con responsabilidades claras, progreso medible, riesgos transparentes y gobernanza disciplinada de la ejecución.",
+        "services.faq1.list": ["Revisión de alcance, límites de batería y estrategia de ejecución","Estructura de gobernanza del lado del propietario y cadencia de toma de decisiones","Revisión de cronograma integrado, ruta crítica y hitos","Línea base de CAPEX, control de costos y lógica de forecast-at-completion","Gestión de interfaces en proceso, civil, E&I, automatización y servicios","Control de riesgos, problemas, órdenes de cambio y exposición a reclamaciones","Coordinación de contratistas y revisión del progreso","Informes mensuales del proyecto del lado del propietario"],
+        "services.faq2.title": "Apoyo de factibilidad e inversión",
+        "services.faq2.text": "Ayudamos a inversores y propietarios industriales a validar oportunidades de proyecto antes de comprometer CAPEX significativo. Nuestro trabajo conecta selección tecnológica, escenarios de capacidad, CAPEX / OPEX / TCO, supuestos de materia prima, economía de productos, riesgos de ejecución y preparación operativa en una lógica de decisión de inversión.",
+        "services.faq2.text2": "El objetivo es pasar de una idea comercial de alto nivel a una visión de inversión estructurada y ajustada por riesgos: qué debe construirse, a qué escala, con qué tecnología, bajo qué supuestos y con qué retorno comercial esperado.",
+        "services.faq2.list": ["Memorando de revisión de factibilidad","Estructura del business case","Comparación de opciones tecnológicas","Análisis de escenarios de capacidad","Modelo CAPEX / OPEX / TCO","Supuestos de inversión ajustados al riesgo","Análisis de sensibilidad","Recomendación de stage-gate","Resumen de decisión de inversión"],
+        "services.faq3.title": "Revisión de adquisiciones y evaluación de ofertas",
+        "services.faq3.text": "Proporcionamos evaluación técnica y comercial independiente de propuestas de proveedores, tecnología y EPC antes de que el cliente se comprometa con la selección de proveedor, adjudicación del contrato o decisiones importantes de CAPEX.",
+        "services.faq3.text2": "La revisión se centra en la integridad del alcance, el cumplimiento técnico, exclusiones ocultas, límites de batería, riesgos de interfaces, supuestos de servicios, garantías de desempeño, condiciones de entrega, obligaciones de commissioning, criterios de aceptación, condiciones de garantía, repuestos, coste del ciclo de vida y coste total de propiedad.",
+        "services.faq3.text3": "El objetivo es mover las decisiones de procurement de la comparación de precios a la comparación de valor ajustado por riesgo, ayudando al propietario a entender qué está incluido, qué falta, qué puede crear exposición de costos futura y qué oferta de proveedor ofrece la posición técnica, comercial y operativa más sólida.",
+        "services.faq3.list": ["Comentarios de revisión de RFQ / RFP","Evaluación técnica de ofertas / TBE","Evaluación comercial de ofertas / CBE","Matriz comparativa de proveedores","Registro de brechas de alcance y exclusiones","Lista de preguntas de aclaración","Modelo de comparación TCO / LCC","Comentarios de riesgos contractuales","Checklist de negociación","Recomendación para selección de proveedor"],
+        "services.faq4.title": "Auditoría de planta, reducción de costos y mejora de rendimiento",
+        "services.faq4.text": "Realizamos auditorías técnicas y operativas de plantas de trituración, refinación, biodiésel y procesos relacionados para identificar pérdidas ocultas, cuellos de botella, ineficiencias de proceso y oportunidades de reducción de costos.",
+        "services.faq4.text2": "La revisión abarca rendimiento de producción, rendimiento, energía y servicios, paradas, estabilidad del proceso, interacción con mantenimiento, calidad del producto, disciplina operativa y factores clave de costo. Cada hallazgo se convierte en una acción de mejora práctica con impacto operativo y financiero esperado.",
+        "services.faq4.text3": "El objetivo no es solo describir los problemas de la planta, sino construir una hoja de ruta clara de mejora del rendimiento: qué debe arreglarse primero, qué impacto comercial puede generar, qué acciones requieren CAPEX y qué mejoras pueden lograrse mediante proceso, mantenimiento o disciplina operativa.",
+        "services.faq4.list": ["Auditoría técnica y operativa de planta","Análisis de cuellos de botella y restricciones de capacidad","Revisión de rendimiento, pérdidas y costos de proceso","Evaluación de energía, servicios y paradas","Análisis de calidad de producto y estabilidad del proceso","Hoja de ruta de mejora priorizada con impacto en EBITDA"],
+        "services.faq5.title": "Contabilidad de paradas y análisis de factores críticos",
+        "services.faq5.text": "Sistema estructurado para registrar paradas, clasificar pérdidas, priorizar factores críticos y conectar con impacto en EBITDA.",
+        "services.faq6.title": "Puesta en marcha, startup y ramp-up",
+        "services.faq6.text": "Apoyamos la transición de la construcción a una operación estable mediante planificación de commissioning, evaluación de preparación, control de punch list, coordinación del start-up y estabilización del ramp-up. Nuestro enfoque no es solo arrancar el equipo, sino ayudar a la planta a alcanzar objetivos cuantitativos y cualitativos acordados: rendimiento, rendimiento de producción, calidad del producto, consumo de servicios, estabilidad del proceso, preparación en seguridad y operación fiable de turnos. Cuando es necesario, también apoyamos la formación de operadores y equipos de turno, la preparación de SOP, listas de verificación de arranque, preparación de pruebas de rendimiento, criterios de aceptación y traspaso al equipo operativo.",
+        "services.faq7.title": "Análisis comercial y de margen",
+        "services.faq7.text": "Cálculos comerciales para plantas de trituración, refinación y biodiésel con análisis de margen, EBITDA y rendimiento.",
+        "services.faq7.list": ["Calculadora de margen de trituración","Modelo de prima de refinería","Modelo de margen bruto e impacto EBITDA","Calculadora de economía de rendimiento","Modelo de escenario de mezcla de productos","Modelo de costos de procesamiento","Lógica de conversión de pérdidas en dinero","Plantilla de informes de producción","Informe mensual de rendimiento a margen","Estructura de panel de gestión"],
+        "services.faq8.title": "Asesoría en biodiésel y materia prima",
+        "services.faq8.text": "Apoyamos proyectos de biodiésel y materias primas para biodiésel desde la idea de negocio inicial hasta la validación técnica y comercial. Nuestro trabajo puede incluir análisis de mercado de materias primas, evaluación de calidad de feedstock, revisión de rutas de proceso, selección tecnológica, revisión de propuestas de proveedores, supuestos de CAPEX / OPEX, integración con activos de trituración o refinación existentes y desarrollo del modelo comercial. El objetivo es ayudar a los clientes a entender si el proyecto de biodiésel es técnicamente factible, comercialmente atractivo y operativamente realista antes de comprometer una inversión importante.",
+        "why.label": "Por qué TechVision Consulting",
+        "why.heading": "Un socio práctico del lado del propietario para CAPEX industrial y valor de rendimiento.",
+        "why.text": "TechVision Consulting combina entrega de CAPEX, operaciones de planta, puesta en marcha, adquisiciones, economía de procesos y análisis comercial para ayudar a tomar decisiones que siguen siendo válidas después de la operación.",
+        "why.card1.title": "Mentalidad del propietario",
+        "why.card1.text": "Apoyamos a propietarios, inversores y equipos de planta con control de proyecto independiente y claridad comercial.",
+        "why.card2.title": "Experiencia práctica",
+        "why.card2.text": "Especialistas sénior con experiencia en refinación, trituración, biodiésel y operaciones industriales.",
+        "why.card3.title": "Técnico + comercial",
+        "why.card3.text": "Vinculamos parámetros de proceso con margen, EBITDA y costos operativos.",
+        "why.card4.title": "Preparación de puesta en marcha",
+        "why.card4.text": "Evaluamos la finalización mecánica, listas de pendientes, criterios de aceptación y riesgo de arranque.",
+        "experience.label": "Experiencia seleccionada",
+        "experience.heading": "Consultoría industrial comprobada en aceites comestibles, trituración y biodiésel.",
+        "experience.card1.text": "Antiguos empleados de Cargill, Bunge y Wilmar con amplia experiencia en equipos de Crown CPM, DeSmet, Bühler, Stolz, Alfa Laval y otros proveedores industriales.",
+        "experience.card2.text": "experiencia en proyectos TPD de greenfield a brownfield y puesta en marcha. Proyectos de refinería 150–1000 TPD en refinerías continuas y semi-continuas; proyectos de trituración 500–3000 TPD.",
+        "experience.card3.text": "exposición de CAPEX en consultorías y revisiones de proyectos.",
+        "experience.card4.text": "asesoría en biodiésel, pretreatment e idoneidad comercial.",
+        "models.label": "Modelos de compromiso",
+        "models.heading": "Formatos flexibles para revisiones tempranas, soporte de ejecución y mejora de planta.",
+        "models.card1.title": "Revisión enfocada",
+        "models.card1.text": "De 2 días a 2 semanas de revisión rápida e independiente de concepto, alcance, cronograma, propuesta de proveedor, riesgo contractual y lógica de inversión, con recomendaciones concretas para los siguientes pasos.",
+        "models.card2.title": "Asesoría fraccional",
+        "models.card2.text": "De 1 mes a 12 meses de asesoría owner-side con visitas periódicas o presencia continua en la planta según acuerdo, apoyando ingeniería, adquisiciones, coordinación EPC, gobernanza y toma de decisiones.",
+        "models.card3.title": "Paquete de mejora",
+        "models.card3.text": "2–8 semanas de auditoría estructurada y hoja de ruta de mejora para plantas en operación, procesos con bajo rendimiento o recuperación de commissioning, con acciones priorizadas para generar valor medible.",
+        "download.heading": "Descargue el capability statement",
+        "download.text": "Una presentación concisa de experiencia para propietarios, inversores y equipos de planta.",
+        "download.cta": "Descargar Capability Statement",
+        "contact.label": "Contacto",
+        "contact.heading": "Revisemos su proyecto, problema de rendimiento o solicitud de cálculo comercial.",
+        "contact.description": "Envíenos el alcance del proyecto, propuesta de proveedor, problema de rendimiento de planta o solicitud comercial. Revisaremos el contexto y propondremos el formato de apoyo más adecuado.",
+        "contact.cta": "Contactar a TechVision Consulting",
+        "footer.tagline": "Asesoría industrial para aceites comestibles, procesamiento de semillas oleaginosas y biodiésel",
+        "footer.languages": "EN / ES / RU / DE"
+      },
+      ru: {
+        "nav.services": "Услуги",
+        "nav.industries": "Отрасли",
+        "nav.expertise": "Экспертиза",
+        "nav.experience": "Опыт",
+        "nav.contact": "Контакты",
+        "cta.request": "Запросить консультацию",
+        "hero.label": "Промышленная консалтинговая поддержка для edible oils, oilseed processing и biodiesel проектов",
+        "hero.headline": "TechVision Consulting",
+        "hero.description": "Owner-side CAPEX, EPC, procurement, commercial and performance improvement support для собственников, инвесторов и производственных команд по Европе и выбранным глобальным рынкам.",
+        "hero.summary": "TechVision Consulting помогает собственникам, инвесторам и проектным командам в edible oils, oilseed processing и biodiesel проектах принимать лучшие решения по CAPEX, EPC, закупкам, коммерции и эксплуатации.",
+        "hero.summary.list": ["проверить инвестиционную идею","оценить CAPEX / OPEX / TCO","сравнить технологические решения","проверить EPC / supplier proposal","выстроить procurement review","подготовить проект к commissioning и start-up","провести plant audit","снизить process costs","улучшить performance","выстроить систему учета простоев и анализа bad actors","перевести показатели производства в коммерческий / EBITDA impact"],
+        "hero.geo": "С фокусом на Европу. Доступно для выбранных глобальных задач.",
+        "hero.cta1": "Запросить консультацию",
+        "hero.cta2": "Смотреть услуги",
+        "industries.label": "Отрасли, которые мы поддерживаем",
+        "industries.heading": "Фокусированная экспертиза для переработки маслосемян, рафинирования и biodiesel.",
+        "industries.card1.title": "Маслопрессование",
+        "industries.card1.text": "Owner-side аудит проекта crushing plants, логистику сырья, выход и интеграцию.",
+        "industries.card2.title": "Рафинирование масел",
+        "industries.card2.text": "Поддержка refineries и commissioning с коммерческим фокусом на маржу и throughput.",
+        "industries.card3.title": "Пласты biodiesel",
+        "industries.card3.text": "Технико-коммерческая поддержка biodiesel проектов и feedstock решений.",
+        "industries.card4.title": "Подготовка сырья",
+        "industries.card4.text": "Pretreatment feedstock для biodiesel, работа с высоко-FFA маслами и кондиционирование.",
+        "industries.card5.title": "Производство масел",
+        "industries.card5.text": "Экономика производства, операционная дисциплина и повышение эффективности.",
+        "industries.card6.title": "Трейдинг и commodities",
+        "industries.card6.text": "Коммерческая экспертиза, связывающая продуктовую матрицу, премии и издержки обработки с маржой.",
+        "audience.label": "Кому мы помогаем",
+        "audience.heading": "Собственникам, инвесторам, проектным командам и действующим заводам.",
+        "audience.card1.title": "Собственники заводов",
+        "audience.card1.text": "Независимое мнение для владельцев активов с owner-side технической и коммерческой поддержкой.",
+        "audience.card2.title": "Инвесторы",
+        "audience.card2.text": "Фактчекинг проектов, CAPEX и рисков для новых участников edible oils и biodiesel.",
+        "audience.card3.title": "Производители",
+        "audience.card3.text": "Поддержка по повышению результата, снижению потерь и улучшению маржи.",
+        "audience.card4.title": "Проектные команды",
+        "audience.card4.text": "Governance EPC, procurement review и готовность к commissioning.",
+        "audience.card5.title": "Действующие заводы",
+        "audience.card5.text": "Идентификация узких мест, учет простоев и анализ yield для роста выхода.",
+        "audience.card6.title": "Без внутреннего техпорта",
+        "audience.card6.text": "Внешняя техническая и коммерческая экспертиза для стратегической идеи или проекта.",
+        "services.label": "Ключевые услуги",
+        "services.heading": "Консалтинг со стороны собственника по CAPEX, закупкам, commissioning и операционной ценности.",
+        "services.faq1.title": "Консультации по CAPEX / EPC",
+        "services.faq1.text": "Мы поддерживаем промышленные CAPEX и EPC проекты от ранней проработки до контролируемой реализации. Наша задача — защищать объем, бюджет, график и контрактную позицию собственника, выстраивая чёткую систему управления вокруг объема проекта, интерфейсов, контроля затрат, логики графика, рисков, изменений, координации подрядчиков и принятия решений.",
+        "services.faq1.text2": "Поддержка может включать стратегию выполнения проекта, проверку объема и battery limits, оценку интегрированного графика, проверку базовой линии CAPEX, настройку проектных контролей, управление интерфейсами, обзор прогресса подрядчиков, управление рисками и проблемами, контроль изменений и отчётность со стороны собственника.",
+        "services.faq1.text3": "Цель — помочь клиенту держать проект под контролем до того, как отклонения станут дорогостоящими, с чёткими обязанностями, измеримым прогрессом, прозрачными рисками и дисциплинированной управленческой моделью исполнения.",
+        "services.faq1.list": ["Ревизия объема проекта, battery limits и стратегии исполнения","Структура управления со стороны собственника и ритм принятия решений","Анализ интегрированного графика, критического пути и ключевых вех","Проверка базовой линии CAPEX, контроль затрат и логика прогноза до завершения","Управление интерфейсами по процессу, гражданской части, E&I, автоматизации и коммунальным услугам","Контроль рисков, проблем, изменений и претензионной экспозиции","Координация подрядчиков и обзор прогресса","Ежемесячная отчётность проекта со стороны собственника"],
+        "services.faq2.title": "Поддержка инвестиционной и технико-экономической оценки",
+        "services.faq2.text": "Мы помогаем инвесторам и промышленным владельцам проверять инвестиционные возможности до крупных CAPEX-решений. Наша работа связывает выбор технологии, сценарии мощности, CAPEX / OPEX / TCO, допущения по сырью, экономику продуктов, риски исполнения и операционную готовность в единую инвестиционную логику.",
+        "services.faq2.text2": "Цель — перейти от концептуальной бизнес-идеи к структурированному, риск-скорректированному инвестиционному взгляду: что строить, в каком масштабе, с какой технологией, при каких допущениях и с каким ожидаемым коммерческим возвратом.",
+        "services.faq2.list": ["Меморандум по проверке технико-экономической обоснованности","Структура бизнес-кейса","Сравнение технологических опций","Анализ сценариев мощности","Модель CAPEX / OPEX / TCO","Риск-скорректированные допущения","Анализ чувствительности","Рекомендация stage-gate","Сводка инвестиционного решения"],
+        "services.faq3.title": "Аудит закупок и оценка заявок",
+        "services.faq3.text": "Мы предоставляем независимую техническую и коммерческую оценку предложений поставщиков, технологий и EPC до того, как клиент примет решение о выборе поставщика, заключении контракта или крупных CAPEX-инвестициях.",
+        "services.faq3.text2": "Обзор фокусируется на полноте объема работ, техническом соответствии, скрытых исключениях, battery limits, рисках интерфейсов, допущениях по коммунальным услугам, гарантиям производительности, условиях поставки, обязательствах commissioning, критериях приемки, условиях гарантии, запасных частях, стоимости жизненного цикла и полной стоимости владения.",
+        "services.faq3.text3": "Цель — перевести решения по закупкам от сравнения цен к сравнению стоимости с учетом рисков, помогая владельцу понять, что включено, чего не хватает, что может создать будущие расходы и какое предложение поставщика дает самую сильную техническую, коммерческую и операционную позицию.",
+        "services.faq3.list": ["Комментарии к RFQ / RFP","Техническая оценка предложения / TBE","Коммерческая оценка предложения / CBE","Матрица сравнения поставщиков","Реестр пробелов объема и исключений","Список вопросов для уточнения","Модель сравнения TCO / LCC","Комментарии по рискам контракта","Чек-лист переговоров","Рекомендация по выбору поставщика"],
+        "services.faq4.title": "Аудит завода, снижение затрат и повышение эффективности",
+        "services.faq4.text": "Мы проводим технические и операционные аудиты действующих crushing, refining, biodiesel и смежных заводов, чтобы выявить скрытые потери, узкие места, неэффективности процесса и возможности снижения затрат.",
+        "services.faq4.text2": "Обзор охватывает производственные показатели, выход, энергетику и коммунальные услуги, простои, стабильность процесса, взаимодействие с обслуживанием, качество продукции, дисциплину эксплуатации и ключевые драйверы затрат. Каждое обнаруженное замечание превращается в практическое улучшение с ожидаемым операционным и финансовым эффектом.",
+        "services.faq4.text3": "Цель не только описать проблемы завода, но и построить ясную дорожную карту улучшения эффективности: что нужно решать в первую очередь, какой бизнес-эффект это может дать, какие действия требуют CAPEX и какие улучшения можно достичь через процесс, обслуживание или дисциплину эксплуатации.",
+        "services.faq4.list": ["Технический и операционный аудит завода","Анализ узких мест и ограничений пропускной способности","Обзор выхода, потерь и затрат процесса","Оценка энергии, коммунальных услуг и простоев","Анализ качества продукции и стабильности процесса","Приоритетная дорожная карта улучшений с влиянием на EBITDA"],
+        "services.faq5.title": "Учет простоев и анализ bad actors",
+        "services.faq5.text": "Структурированная система учета простоев, классификации потерь, ранжирования bad actors и связи с EBITDA.",
+        "services.faq6.title": "Комисcионирование, запуск и ramp-up",
+        "services.faq6.text": "Мы поддерживаем переход от строительства к стабильной эксплуатации через планирование commissioning, оценку готовности, контроль punch list, координацию запуска и стабилизацию ramp-up. Наш фокус — не просто запустить оборудование, но помочь заводу достичь согласованных количественных и качественных показателей: производительность, выход, качество продукции, потребление энергоресурсов, стабильность процесса, готовность по безопасности и надежную сменную работу. При необходимости мы также поддерживаем обучение операторов и сменных команд, подготовку SOP, чек-листы запуска, готовность к испытаниям производительности, критерии приемки и передачу операционной команде.",
+        "services.faq7.title": "Коммерческая и маржинальная аналитика",
+        "services.faq7.text": "Коммерческие расчеты для crushing, refining и biodiesel с анализом влияния на EBITDA, маржу и выход.",
+        "services.faq7.list": ["Калькулятор маржи crushing","Модель премии refinery","Модель валовой маржи и влияния на EBITDA","Калькулятор экономики выхода","Модель сценариев продуктового микса","Модель затрат на переработку","Логика перевода потерь в деньги","Шаблон отчета по производству","Ежемесячный отчет производительность–маржа","Структура дашборда для менеджмента"],
+        "services.faq8.title": "Консультации по biodiesel и сырью",
+        "services.faq8.text": "Мы поддерживаем проекты biodiesel и подготовки сырья с ранней бизнес-идеи до технической и коммерческой валидации. Работа может включать анализ рынка сырья, оценку качества feedstock, оценку технологических маршрутов, выбор технологий, проверку предложений поставщиков, предположения CAPEX / OPEX, интеграцию с существующими активами crushing или refining и разработку коммерческой бизнес-модели. Цель — помочь клиентам понять, является ли проект biodiesel технически выполнимым, коммерчески привлекательным и операционно реалистичным до принятия крупного инвестиционного решения.",
+        "why.label": "Почему TechVision Consulting",
+        "why.heading": "Практический партнер с owner-side подходом для CAPEX и роста производительности.",
+        "why.text": "TechVision Consulting сочетает поставку CAPEX, эксплуатацию, commissioning, закупки, экономику процессов и коммерческую аналитику, чтобы решения оставались корректными после запуска.",
+        "why.card1.title": "Owner-side подход",
+        "why.card1.text": "Поддержка владельцев, инвесторов и команд с независимым контролем проекта и коммерческой ясностью.",
+        "why.card2.title": "Практический опыт",
+        "why.card2.text": "Старшие специалисты в refining, crushing, biodiesel и промышленных операциях.",
+        "why.card3.title": "Технико-коммерческий взгляд",
+        "why.card3.text": "Мы связываем процессные параметры с маржей, EBITDA и затратами.",
+        "why.card4.title": "Готовность к commissioning",
+        "why.card4.text": "Оцениваем mechanical completion, punch list и риски старта.",
+        "experience.label": "Избранный опыт",
+        "experience.heading": "Подтвержденная консультативная работа в edible oils, crushing и biodiesel.",
+        "experience.card1.text": "Бывшие сотрудники Cargill, Bunge и Wilmar с богатым опытом работы на оборудовании Crown CPM, DeSmet, Bühler, Stolz, Alfa Laval и других промышленных поставщиков.",
+        "experience.card2.text": "опыт TPD проектов от greenfield до brownfield и пуска. Проекты рафинерий 150–1000 TPD для непрерывных и полунепрерывных установок; проекты крашинга 500–3000 TPD.",
+        "experience.card3.text": "CAPEX-экспозиция в проектах от EUR 3.7m до EUR 75m.",
+        "experience.card4.text": "консультации по biodiesel, pretreatment и коммерческой целесообразности.",
+        "models.label": "Модели взаимодействия",
+        "models.heading": "Гибкие форматы для ранних проверок, поддержки выполнения и улучшения завода.",
+        "models.card1.title": "Фокусированная проверка",
+        "models.card1.text": "От 2 дней до 2 недель независимого быстрого обзора концепции, объема, графика, предложения поставщика, контрактных рисков и инвестиционной логики с четкими рекомендациями по следующим шагам.",
+        "models.card2.title": "Фракционная поддержка",
+        "models.card2.text": "От 1 месяца до 12 месяцев owner-side поддержки с периодическими или постоянными выездами на площадку по согласованию, поддерживая инженерию, закупки, координацию EPC, управление и принятие решений.",
+        "models.card3.title": "Пакет улучшений",
+        "models.card3.text": "2–8 недель структурированной аудиторской проверки и дорожной карты улучшений для действующих заводов, недорабатывающих процессов или восстановления commissioning с приоритизацией мер для измеримого эффекта.",
+        "download.heading": "Скачать capability statement",
+        "download.text": "Краткий документ о компетенциях для владельцев, инвесторов и команд, оценивающих консалтинг.",
+        "download.cta": "Скачать Capability Statement",
+        "contact.label": "Контакты",
+        "contact.heading": "Давайте обсудим ваш проект, проблему производительности или коммерческий запрос.",
+        "contact.description": "Отправьте нам объем проекта, предложение поставщика, проблему производительности или коммерческий запрос. Мы предложим оптимальный формат поддержки.",
+        "contact.cta": "Связаться с TechVision Consulting",
+        "footer.tagline": "Промышленная консультация для edible oils, oilseed processing и biodiesel проектов",
+        "footer.languages": "EN / ES / RU / DE"
+      },
+      de: {
+        "nav.services": "Leistungen",
+        "nav.industries": "Branchen",
+        "nav.expertise": "Expertise",
+        "nav.experience": "Erfahrung",
+        "nav.contact": "Kontakt",
+        "cta.request": "Beratung anfragen",
+        "hero.label": "Industrielle Beratung für Speiseöle, Ölsaatenverarbeitung und Biodieselprojekte",
+        "hero.headline": "TechVision Consulting",
+        "hero.description": "Owner-side CAPEX, EPC, Beschaffung, kommerzieller und leistungsbezogener Support für Eigentümer, Investoren und Werksmannschaften in Europa und ausgewählten globalen Märkten.",
+        "hero.summary": "TechVision Consulting hilft Eigentümern, Investoren und Werksmannschaften in Speiseölen, Ölsaatenverarbeitung und biodieselbezogenen Projekten, bessere Entscheidungen in CAPEX, EPC, Beschaffung, kommerziellen und operativen Fragen zu treffen.",
+        "hero.summary.list": ["Investitionsidee prüfen","CAPEX / OPEX / TCO bewerten","Technologieoptionen vergleichen","EPC- und Lieferantenangebote prüfen","Beschaffungsprüfung aufbauen","Projekt für Commissioning und Start-up vorbereiten","Werksaudit durchführen","Prozesskosten senken","Leistung verbessern","Stillstandsrechnung und Bad-Actor-Analyse einführen","Produktionskennzahlen in kommerziellen / EBITDA-Effekt übertragen"],
+        "hero.geo": "Europa-fokussiert. Für ausgewählte globale Einsätze verfügbar.",
+        "hero.cta1": "Beratung anfragen",
+        "hero.cta2": "Leistungen anzeigen",
+        "industries.label": "Branchen, die wir unterstützen",
+        "industries.heading": "Fokussierte Beratung für Ölsaatenverarbeitung, Raffination und Biodiesel.",
+        "industries.card1.title": "Ölsaatenvermahlung",
+        "industries.card1.text": "Owner-side Bewertungen des Werksumfangs, der Rohstofflogistik, des Ertrags und der Integration.",
+        "industries.card2.title": "Speiseölraffination",
+        "industries.card2.text": "Unterstützung von Raffinerieprojekten und Inbetriebnahme mit Fokus auf Marge und Durchsatz.",
+        "industries.card3.title": "Biodieselanlagen",
+        "industries.card3.text": "Technisch-kommerzielle Unterstützung für Biodieselprojekte, Anlagenbewertung und Rohstoffrouten.",
+        "industries.card4.title": "Rohstoffvorbereitung",
+        "industries.card4.text": "Aufbereitung von Biodiesel-Rohstoffen, Umgang mit hohem FFA und Konditionierungsprüfung.",
+        "industries.card5.title": "Pflanzenölproduktion",
+        "industries.card5.text": "Produktionsökonomie, operative Disziplin und Leistungsverbesserung für Speiseölbetriebe.",
+        "industries.card6.title": "Handel & Commodities",
+        "industries.card6.text": "Kommerzielle Beratung, die Produktmix, Prämien und Verarbeitungskosten mit Margen verbindet.",
+        "audience.label": "Wen wir unterstützen",
+        "audience.heading": "Eigentümer, Investoren, Werksmannschaften und laufende Anlagen.",
+        "audience.card1.title": "Werksbesitzer",
+        "audience.card1.text": "Unabhängige Beratung für Asset-Eigentümer, die einen owner-side technischen und kommerziellen Partner suchen.",
+        "audience.card2.title": "Investoren",
+        "audience.card2.text": "Risikoorientierte Machbarkeits- und CAPEX-Analyse für Neueinsteiger in Speiseöle und Biodiesel.",
+        "audience.card3.title": "Produzenten",
+        "audience.card3.text": "Leistungs-, Prozess- und Margenverbesserung für Speiseölverarbeiter und Händler.",
+        "audience.card4.title": "Projektteams",
+        "audience.card4.text": "EPC-Governance, Beschaffungsprüfung und Inbetriebnahmevorbereitung für Industrieteams.",
+        "audience.card5.title": "Betriebsanlagen",
+        "audience.card5.text": "Engpassdiagnose, Ausfallkostenrechnung und Ertragsökonomie zur Steigerung der Anlagenausbeute.",
+        "audience.card6.title": "Ohne interne Technikressourcen",
+        "audience.card6.text": "Externe technische und kommerzielle Expertise für strategische Projekte oder Investitionsideen.",
+        "services.label": "Kernleistungen",
+        "services.heading": "Owner-side Beratung für CAPEX, Beschaffung, Inbetriebnahme und operativen Wert.",
+        "services.faq1.title": "CAPEX / EPC Projektberatung",
+        "services.faq1.text": "Wir unterstützen industrielle CAPEX- und EPC-Projekte von der frühen Projektdefinition bis zur kontrollierten Ausführung. Unsere Rolle ist es, den Umfang, das Budget, den Zeitplan und die Vertragsposition des Eigentümers zu schützen, indem wir ein klares Governance-System rund um Projektumfang, Schnittstellen, Kostenkontrolle, Zeitlogik, Risiken, Änderungsaufträge, Koordination von Auftragnehmern und Entscheidungsfindung aufbauen.",
+        "services.faq1.text2": "Die Unterstützung kann Projektausführungsstrategie, Prüfung des Umfangs und der battery limits, Beurteilung des integrierten Zeitplans, CAPEX-Baseline-Check, Einrichtung von Projektkontrollen, Schnittstellenmanagement, Überprüfung des Fortschritts der Auftragnehmer, Risiko- und Problemmanagement, Kontrolle von Änderungsaufträgen und Betreiberberichtswesen umfassen.",
+        "services.faq1.text3": "Das Ziel ist es, dem Kunden zu helfen, das Projekt unter Kontrolle zu halten, bevor Abweichungen teuer werden, mit klaren Verantwortlichkeiten, messbarem Fortschritt, transparenten Risiken und disziplinierter Ausführungsgovernance.",
+        "services.faq1.list": ["Überprüfung von Projektumfang, battery limits und Ausführungsstrategie","Owner-side Governance-Struktur und Entscheidungsrhythmus","Überprüfung integrierter Zeitpläne, kritischer Pfade und Meilensteine","CAPEX-Baseline, Kostenkontrolle und Forecast-at-Completion-Logik","Schnittstellenmanagement über Prozess, Civil, E&I, Automatisierung und Versorgung","Kontrolle von Risiken, Problemen, Änderungsaufträgen und Claim-Exposition","Koordination von Auftragnehmern und Fortschrittsprüfung","Monatliches Owner-side Projektberichtswesen"],
+        "services.faq2.title": "Machbarkeits- & Investitionsunterstützung",
+        "services.faq2.text": "Wir helfen Investoren und industriellen Eigentümern, Projektchancen zu validieren, bevor sie sich zu größeren CAPEX-Verpflichtungen entscheiden. Unsere Arbeit verbindet Technologiewahl, Kapazitätsszenarien, CAPEX / OPEX / TCO, Rohstoffannahmen, Produktsökonomie, Umsetzungsrisiken und operative Einsatzbereitschaft zu einer Investment-Entscheidungslogik.",
+        "services.faq2.text2": "Das Ziel ist es, von einer groben Geschäftsidee zu einer strukturierten, risikoadjustierten Investitionssicht zu gelangen: was gebaut werden soll, in welchem Maßstab, mit welcher Technologie, unter welchen Annahmen und mit welchem erwarteten kommerziellen Ertrag.",
+        "services.faq2.list": ["Machbarkeitsprüfungs-Memo","Business-Case-Struktur","Technologieoptionsvergleich","Kapazitätsszenarioanalyse","CAPEX / OPEX / TCO Modell","Risikoadjustierte Investitionsannahmen","Sensitivitätsanalyse","Stage-Gate-Empfehlung","Investitionsentscheidungszusammenfassung"],
+        "services.faq3.title": "Beschaffungsprüfung & Angebotsauswertung",
+        "services.faq3.text": "Wir liefern unabhängige technische und kommerzielle Bewertung von Lieferanten-, Technologie- und EPC-Vorschlägen, bevor der Kunde sich für eine Lieferantenauswahl, Vertragsvergabe oder größere CAPEX-Entscheidungen verpflichtet.",
+        "services.faq3.text2": "Die Prüfung konzentriert sich auf Umfangsvollständigkeit, technische Compliance, versteckte Ausschlüsse, battery limits, Schnittstellenrisiken, Versorgungsannahmen, Leistungsgarantien, Lieferbedingungen, Inbetriebnahmeverpflichtungen, Abnahmekriterien, Garantiebedingungen, Ersatzteile, Lebenszykluskosten und Total Cost of Ownership.",
+        "services.faq3.text3": "Das Ziel ist es, Beschaffungsentscheidungen von Preisvergleichen hin zu risikoadjustierten Wertvergleichen zu verschieben – dem Eigentümer zu helfen zu verstehen, was enthalten ist, was fehlt, was zukünftige Kostenexponierung schaffen kann und welches Lieferantenangebot die stärkste technische, kommerzielle und operative Position bietet.",
+        "services.faq3.list": ["RFQ / RFP Prüfanmerkungen","Technische Angebotsbewertung / TBE","Kommerzielle Angebotsbewertung / CBE","Lieferantenvergleichsmatrix","Umfangslücken- und Ausschlussregister","Liste von Klärungsfragen","TCO / LCC Vergleichsmodell","Vertragsrisikokommentare","Verhandlungscheckliste","Empfehlung zur Lieferantenauswahl"],
+        "services.faq4.title": "Anlagenprüfung, Kostensenkung & Leistungssteigerung",
+        "services.faq4.text": "Wir führen technische und operative Audits bestehender Zerkleinerungs-, Raffinations-, Biodiesel- und verwandter Prozessanlagen durch, um versteckte Verluste, Engpässe, Prozessineffizienzen und Kostensenkungsmöglichkeiten zu erkennen.",
+        "services.faq4.text2": "Die Überprüfung umfasst Produktionsleistung, Ausbeute, Energie und Versorgung, Stillstände, Prozessstabilität, Wartungsinteraktion, Produktqualität, operative Disziplin und wichtige Kostentreiber. Jede Feststellung wird in eine praktische Verbesserungsmaßnahme mit erwarteter operativer und finanzieller Wirkung umgewandelt.",
+        "services.faq4.text3": "Das Ziel ist nicht nur, Anlagenprobleme zu beschreiben, sondern eine klare Leistungsverbesserungs-Roadmap zu erstellen: was zuerst behoben werden sollte, welchen Geschäftseinfluss es haben kann, welche Maßnahmen CAPEX erfordern und welche Verbesserungen durch Prozess-, Wartungs- oder operative Disziplin erreicht werden können.",
+        "services.faq4.list": ["Technische und operative Anlagenprüfung","Analyse von Engpässen und Kapazitätsgrenzen","Überprüfung von Ausbeute, Verlusten und Prozesskosten","Bewertung von Energie, Versorgung und Stillständen","Analyse von Produktqualität und Prozessstabilität","Priorisierte Verbesserungsroadmap mit EBITDA-Effekt"],
+        "services.faq5.title": "Stillstandsrechnung & Bad Actor Analyse",
+        "services.faq5.text": "Strukturiertes System zur Erfassung von Ausfällen, Klassifizierung von Verlusten, Priorisierung von Bad Actors und Verknüpfung mit EBITDA-Auswirkungen.",
+        "services.faq6.title": "Inbetriebnahme, Start-up & Ramp-up Unterstützung",
+        "services.faq6.text": "Wir unterstützen den Übergang vom Bau zur stabilen Betriebsphase durch Inbetriebnahmeplanung, Bereitschaftsbewertung, Mängelmanagement, Start-up-Koordination und Ramp-up-Stabilisierung. Unser Fokus liegt nicht nur auf dem Anfahren der Ausrüstung, sondern darauf, der Anlage zu helfen, vereinbarte quantitative und qualitative Leistungsziele zu erreichen: Durchsatz, Ausbeute, Produktqualität, Energieverbrauch, Prozessstabilität, Sicherheitsbereitschaft und zuverlässigen Schichtbetrieb. Bei Bedarf unterstützen wir auch Operator- und Schichtteam-Schulungen, die Vorbereitung von SOPs, Start-up-Checklisten, Leistungsprüfungsbereitschaft, Abnahmekriterien und die Übergabe an das Betriebsteam.",
+        "services.faq7.title": "Kommerzielle & Margenanalysen",
+        "services.faq7.text": "Kommerzielle Produktionsrechnungen für Zerkleinerung, Raffination und Biodiesel mit EBITDA-, Margen- und Ausbeuteanalysen.",
+        "services.faq7.list": ["Crushing-Margen-Kalkulator","Raffinerie-Prämienmodell","Bruttomargen- und EBITDA-Impact-Modell","Yield-Ökonomie-Kalkulator","Produktmix-Szenario-Modell","Verarbeitungskostenmodell","Verlust-zu-Geld-Konvertierungslogik","Produktionsberichtsvorlage","Monatlicher Performance-zu-Marge-Bericht","Management-Dashboard-Struktur"],
+        "services.faq8.title": "Biodiesel- & Rohstoffberatung",
+        "services.faq8.text": "Wir unterstützen Biodiesel- und Biodiesel-Rohstoffprojekte von der frühen Geschäftsidee bis zur technischen und kommerziellen Validierung. Unsere Arbeit kann Marktanalysen für Rohstoffe, Qualitätsbewertung des Feedstocks, Bewertung von Prozessrouten, Technologiewahl, Prüfung von Lieferantenangeboten, CAPEX / OPEX-Annahmen, Integration mit bestehenden Ölpress- oder Raffinerieanlagen und Entwicklung des kommerziellen Geschäftsmodells umfassen. Ziel ist es, den Kunden zu helfen zu verstehen, ob das Biodiesel-Projekt technisch machbar, kommerziell attraktiv und operativ realistisch ist, bevor erhebliche Investitionen getätigt werden.",
+        "why.label": "Warum TechVision Consulting",
+        "why.heading": "Ein praktischer Owner-side Partner für industrielles CAPEX und Performance-Wert.",
+        "why.text": "TechVision Consulting verbindet CAPEX-Ausführung, Anlagenbetrieb, Inbetriebnahme, Beschaffung, Prozessökonomie und kommerzielle Analytik, damit Entscheidungen nach Inbetriebnahme Bestand haben.",
+        "why.card1.title": "Owner-side Mentalität",
+        "why.card1.text": "Wir unterstützen Eigentümer, Investoren und Werksmannschaften mit unabhängiger Projektsteuerung und kommerzieller Klarheit.",
+        "why.card2.title": "Praktische Erfahrung",
+        "why.card2.text": "Senior-Fachleute mit Erfahrung in Raffination, Zerkleinerung, Biodiesel und industriellen Abläufen.",
+        "why.card3.title": "Technisch + kommerziell",
+        "why.card3.text": "Wir verknüpfen Prozessparameter mit Marge, EBITDA und Betriebskosten.",
+        "why.card4.title": "Inbetriebnahme-Bereitschaft",
+        "why.card4.text": "Wir bewerten Mechanical Completion, Mängelmanagement, Annahmekriterien und Start-up-Risiko.",
+        "experience.label": "Ausgewählte Erfahrung",
+        "experience.heading": "Erprobte industrielle Beratung in Speiseölen, Zerkleinerung und Biodiesel.",
+        "experience.card1.text": "Ehemalige Mitarbeiter von Cargill, Bunge und Wilmar mit umfassender Erfahrung auf Ausrüstungen von Crown CPM, DeSmet, Bühler, Stolz, Alfa Laval und anderen Industrieanbietern.",
+        "experience.card2.text": "TPD-Projekterfahrung von Greenfield bis Brownfield und Inbetriebnahme. Raffinerieprojekte 150–1000 TPD kontinuierlich und semi-kontinuierlich; Crushing-Projekte 500–3000 TPD.",
+        "experience.card3.text": "CAPEX-Exposition über EUR 3,7m bis 75m.",
+        "experience.card4.text": "Biodiesel-, Pretreatment- und Machbarkeitsberatung.",
+        "models.label": "Engagement-Modelle",
+        "models.heading": "Flexible Formate für frühe Bewertungen, Durchführungsunterstützung und Anlagenverbesserung.",
+        "models.card1.title": "Fokussierte Prüfung",
+        "models.card1.text": "2 Tage bis 2 Wochen unabhängige, schnelle Prüfung von Konzept, Umfang, Zeitplan, Lieferantenangebot, Vertragsrisiken und Investitionslogik mit konkreten Empfehlungen für die nächsten Schritte.",
+        "models.card2.title": "Fractional Advisory",
+        "models.card2.text": "1 Monat bis 12 Monate owner-side Beratung mit periodischer oder durchgehender Vor-Ort-Anwesenheit nach Vereinbarung, zur Unterstützung von Engineering, Beschaffung, EPC-Koordination, Governance und Entscheidungsfindung.",
+        "models.card3.title": "Improvement Package",
+        "models.card3.text": "2–8 Wochen strukturierte Prüfung und Verbesserungsroadmap für laufende Anlagen, unterperformende Prozesse oder Kommissionierungswiederherstellung mit priorisierten Maßnahmen für messbaren Wertzuwachs.",
+        "download.heading": "Capability Statement herunterladen",
+        "download.text": "Ein kompaktes Dokument der Expertise für Eigentümer, Investoren und Werksmannschaften.",
+        "download.cta": "Capability Statement herunterladen",
+        "contact.label": "Kontakt",
+        "contact.heading": "Lassen Sie uns Ihr Projekt, Ihr Leistungsproblem oder Ihre kommerzielle Anfrage prüfen.",
+        "contact.description": "Senden Sie uns Ihr Projektvolumen, Lieferantenangebot, Leistungsproblem oder kommerzielle Anfrage. Wir prüfen den Kontext und schlagen das passende Unterstützungsformat vor.",
+        "contact.cta": "TechVision Consulting kontaktieren",
+        "footer.tagline": "Industrielle Beratung für Speiseöle, Ölsaatenverarbeitung und Biodieselprojekte",
+        "footer.languages": "EN / ES / RU / DE"
+      }
+    };
+
+    const textElements = Array.from(document.querySelectorAll('[data-i18n]'));
+    const langButtons = Array.from(document.querySelectorAll('.lang-switch button'));
+
+    function setLanguage(lang) {
+      const dictionary = translations[lang] || translations.en;
+      textElements.forEach(el => {
+        const key = el.dataset.i18n;
+        const value = dictionary[key];
+        if (!value) return;
+        if (Array.isArray(value)) {
+          if (el.tagName === 'UL') {
+            el.innerHTML = '';
+            value.forEach(item => {
+              const li = document.createElement('li');
+              li.textContent = item;
+              el.appendChild(li);
+            });
+          } else {
+            const list = document.createElement('ul');
+            value.forEach(item => {
+              const li = document.createElement('li');
+              li.textContent = item;
+              list.appendChild(li);
+            });
+            el.innerHTML = '';
+            el.appendChild(list);
+          }
+        } else {
+          el.textContent = value;
+        }
+      });
+      langButtons.forEach(button => button.classList.toggle('active', button.dataset.lang === lang));
+      document.documentElement.lang = lang;
+    }
+
+    langButtons.forEach(button => {
+      button.addEventListener('click', () => setLanguage(button.dataset.lang));
+    });
+
+    document.querySelectorAll('.accordion-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const panel = document.getElementById(button.dataset.target);
+        const isOpen = panel.classList.toggle('open');
+        button.setAttribute('aria-expanded', String(isOpen));
+      });
+    });
+
+    setLanguage('en');
+  </script>
+</body>
+</html>

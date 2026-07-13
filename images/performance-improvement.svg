@@ -1,0 +1,26 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="performanceTitle">
+  <title id="performanceTitle">Performance improvement and analytics illustration</title>
+  <defs>
+    <linearGradient id="bg2" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#eef2f5" />
+      <stop offset="100%" stop-color="#d6dae2" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg2)" />
+  <rect x="140" y="220" width="420" height="280" fill="#1925aa" opacity="0.1" />
+  <rect x="520" y="260" width="380" height="220" fill="#1925aa" opacity="0.08" />
+  <rect x="880" y="320" width="180" height="200" fill="#1925aa" opacity="0.06" />
+  <g fill="#0d1355">
+    <rect x="200" y="260" width="90" height="200" rx="8" />
+    <rect x="320" y="300" width="90" height="160" rx="8" />
+    <rect x="440" y="210" width="90" height="250" rx="8" />
+    <rect x="560" y="310" width="90" height="150" rx="8" />
+    <rect x="680" y="260" width="90" height="200" rx="8" />
+    <rect x="800" y="340" width="90" height="120" rx="8" />
+    <rect x="920" y="380" width="90" height="80" rx="8" />
+  </g>
+  <path d="M 160 560 C 280 520 360 500 450 520 S 700 620 820 600 S 1010 520 1080 540" fill="none" stroke="#1925aa" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" />
+  <circle cx="450" cy="520" r="26" fill="#1925aa" />
+  <circle cx="820" cy="600" r="26" fill="#1925aa" />
+  <circle cx="1080" cy="540" r="26" fill="#1925aa" />
+</svg>
